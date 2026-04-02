@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Building Certification Fee Calculator</title>
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #f1f8e9;
+            --text-color: #333;
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 20px;
+        }
+
+        .tab button {
+            background-color: inherit;
+            color: #666;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 24px;
+            transition: 0.3s;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+            margin-top: 0;
+            width: auto;
+        }
+
+        .tab button:hover { color: var(--primary-color); }
+        .tab button.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .tabcontent { display: none; animation: fadeEffect 0.5s; }
+        @keyframes fadeEffect { from {opacity: 0;} to {opacity: 1;} }
+
+        h2 {
+            color: #444;
+            background-color: var(--secondary-color);
+            padding: 10px;
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+        }
+
+        .calculator-section {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .input-group { display: flex; gap: 10px; }
+        .input-group input { flex: 2; }
+        .input-group select { flex: 1; }
+
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        select, input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .calc-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .calc-btn:hover { background-color: #1b5e20; }
+
+        .result-box {
+            background-color: #fafafa;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .result-row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 16px; }
+        .result-total { border-top: 2px solid #ccc; padding-top: 10px; font-weight: bold; font-size: 18px; color: var(--primary-color); }
+        .conversion-text { font-size: 14px; color: #666; font-weight: normal; }
+        .note { font-size: 13px; color: #555; margin-top: 5px; }
+        a.calc-link { color: #1565c0; text-decoration: none; font-weight: bold; }
+        a.calc-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Green Building Certification Fee Calculator</h1>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'Existing')">Existing Buildings</button>
+        <button class="tablinks" onclick="openTab(event, 'New')">New Buildings</button>
+    </div>
+
+    <!-- EXISTING BUILDINGS TAB -->
+    <div id="Existing" class="tabcontent" style="display: block;">
+        <div class="calculator-section">
+            <h2>LEED v4.1 / v5 O+M</h2>
+            <div class="form-group">
+                <label>USGBC Membership Status</label>
+                <select id="leed-membership">
+                    <option value="member">Silver, Gold and Platinum level members</option>
+                    <option value="nonmember">Organizational level members or nonmembers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Project Gross Floor Area</label>
+                <div class="input-group">
+                    <input type="number" id="leed-area" placeholder="Enter area" min="0">
+                    <select id="leed-unit">
+                        <option value="sqft">sq ft</option>
+                        <option value="sqm">sq m</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calc-btn" onclick="calculateLEED_EB()">Calculate LEED O+M Fees</button>
+            <div id="leed-result" class="result-box">
+                <div class="result-row"><span>Registration Fee:</span><span id="leed-reg-fee">USD 0</span></div>
+                <div class="result-row"><span>Certification Review Fee:</span><span id="leed-review-fee">USD 0</span></div>
+                <div class="result-row result-total"><span>Total Fee:</span>
+                    <div style="text-align: right;"><span id="leed-total-fee-usd">USD 0</span><br><span id="leed-total-fee-hkd" class="conversion-text">≈ HKD 0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h2>BEAM Plus EB (Scheme A)</h2>
+            <div class="form-group">
+                <label>Registration Situation</label>
+                <select id="beam-situation">
+                    <option value="1">All general cases</option>
+                    <option value="2">Registration before expiry of NB cert</option>
+                    <option value="3">Recertification before expiry of EB cert</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Construction Floor Area</label>
+                <div class="input-group">
+                    <input type="number" id="beam-area" placeholder="Enter area" min="0">
+                    <select id="beam-unit">
+                        <option value="sqm">sq m</option>
+                        <option value="sqft">sq ft</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calc-btn" onclick="calculateBEAM_EB()">Calculate BEAM Plus EB Fees</button>
+            <div id="beam-result" class="result-box">
+                <div class="result-row"><span>Project Scale:</span><strong id="beam-scale-text">-</strong></div>
+                <div class="result-row"><span>Registration Fee:</span><span id="beam-reg-fee">HKD 0</span></div>
+                <div class="result-row"><span>Assessment Fee:</span><span id="beam-assess-fee">HKD 0</span></div>
+                <div class="result-row result-total"><span>Total Fee:</span><span id="beam-total-fee">HKD 0</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW BUILDINGS TAB -->
+    <div id="New" class="tabcontent">
+        <div class="calculator-section">
+            <h2>LEED (BD+C)</h2>
+            <div class="form-group">
+                <label>USGBC Membership Status</label>
+                <select id="leed-nb-membership">
+                    <option value="member">Silver, Gold and Platinum level members</option>
+                    <option value="nonmember">Organizational level members or nonmembers</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Review Type</label>
+                <select id="leed-nb-review-type">
+                    <option value="combined">Combined (Design + Construction)</option>
+                    <option value="split">Split (Design and Construction separately)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Precertification Required?</label>
+                <select id="leed-nb-precert">
+                    <option value="no">No</option>
+                    <option value="yes">Yes (Add Precertification Flat Fee)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Project Gross Floor Area</label>
+                <div class="input-group">
+                    <input type="number" id="leed-nb-area" placeholder="Enter area" min="0">
+                    <select id="leed-nb-unit">
+                        <option value="sqft">sq ft</option>
+                        <option value="sqm">sq m</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calc-btn" onclick="calculateLEED_NB()">Calculate LEED BD+C Fees</button>
+            <div id="leed-nb-result" class="result-box">
+                <div class="result-row"><span>Registration Fee:</span><span id="leed-nb-reg-fee">USD 0</span></div>
+                <div id="precert-row" class="result-row" style="display:none;"><span>Precertification Fee:</span><span id="leed-nb-precert-fee">USD 0</span></div>
+                <div class="result-row"><span>Review Fee (<span id="review-type-label">Combined</span>):</span><span id="leed-nb-review-fee">USD 0</span></div>
+                <div class="result-row result-total"><span>Total Fee:</span>
+                    <div style="text-align: right;"><span id="leed-nb-total-fee-usd">USD 0</span><br><span id="leed-nb-total-fee-hkd" class="conversion-text">≈ HKD 0</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-section">
+            <h2>BEAM Plus NB</h2>
+            <div class="form-group">
+                <label>Construction Floor Area</label>
+                <div class="input-group">
+                    <input type="number" id="beam-nb-area" placeholder="Enter area" min="0">
+                    <select id="beam-nb-unit">
+                        <option value="sqm">sq m</option>
+                        <option value="sqft">sq ft</option>
+                    </select>
+                </div>
+            </div>
+            <button class="calc-btn" onclick="calculateBEAM_NB()">Calculate BEAM Plus NB Fees</button>
+            <div id="beam-nb-result" class="result-box">
+                <div class="result-row"><span>Project Scale:</span><strong id="beam-nb-scale-text">-</strong></div>
+                <div class="result-row"><span>Registration Fee:</span><span id="beam-nb-reg-fee">HKD 0</span></div>
+                <div class="result-row"><span>Assessment Fee:</span><span id="beam-nb-assess-fee">HKD 0</span></div>
+                <div class="result-row result-total"><span>Total Fee:</span><span id="beam-nb-total-fee">HKD 0</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) tablinks[i].className = tablinks[i].className.replace(" active", "");
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    const formatUSD = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+    const formatHKD = new Intl.NumberFormat('en-HK', { style: 'currency', currency: 'HKD', maximumFractionDigits: 0 });
+    const SQM_TO_SQFT = 10.7639;
+    const USD_TO_HKD = 7.9;
+
+    function calculateLEED_EB() {
+        const isMember = document.getElementById('leed-membership').value === 'member';
+        const areaSqFt = document.getElementById('leed-unit').value === 'sqm' ? document.getElementById('leed-area').value * SQM_TO_SQFT : document.getElementById('leed-area').value;
+        if(!areaSqFt) return alert("Enter area");
+
+        const reg = isMember ? 1350 : 1700;
+        let review = 0;
+        let custom = false;
+
+        if (areaSqFt < 250000) review = Math.max(areaSqFt * (isMember ? 0.026 : 0.030), isMember ? 1275 : 1500);
+        else if (areaSqFt < 500000) review = Math.max(areaSqFt * (isMember ? 0.024 : 0.028), isMember ? 6500 : 7500);
+        else if (areaSqFt < 750000) review = Math.max(areaSqFt * (isMember ? 0.020 : 0.024), isMember ? 12000 : 14000);
+        else custom = true;
+
+        document.getElementById('leed-result').style.display = 'block';
+        document.getElementById('leed-reg-fee').innerText = formatUSD.format(reg).replace('$', 'USD ');
+        if(custom) {
+            document.getElementById('leed-review-fee').innerHTML = '<a href="https://www.usgbc.org/tools/leed-certification/pricing-tool" target="_blank" class="calc-link">LEED Pricing Tool</a>';
+            document.getElementById('leed-total-fee-usd').innerText = "USD " + reg + " + Custom";
+        } else {
+            document.getElementById('leed-review-fee').innerText = formatUSD.format(review).replace('$', 'USD ');
+            document.getElementById('leed-total-fee-usd').innerText = formatUSD.format(reg + review).replace('$', 'USD ');
+            document.getElementById('leed-total-fee-hkd').innerText = "≈ " + formatHKD.format((reg + review) * USD_TO_HKD).replace('HK$', 'HKD ');
+        }
+    }
+
+    function calculateLEED_NB() {
+        const isMember = document.getElementById('leed-nb-membership').value === 'member';
+        const reviewType = document.getElementById('leed-nb-review-type').value;
+        const precertReq = document.getElementById('leed-nb-precert').value === 'yes';
+        const areaSqFt = document.getElementById('leed-nb-unit').value === 'sqm' ? document.getElementById('leed-nb-area').value * SQM_TO_SQFT : document.getElementById('leed-nb-area').value;
+        
+        if(!areaSqFt) return alert("Enter area");
+
+        const reg = isMember ? 1350 : 1700;
+        const precert = precertReq ? (isMember ? 4500 : 5600) : 0;
+        let review = 0;
+        let custom = false;
+
+        document.getElementById('review-type-label').innerText = reviewType.charAt(0).toUpperCase() + reviewType.slice(1);
+
+        if (reviewType === 'combined') {
+            if (areaSqFt < 250000) review = Math.max(areaSqFt * (isMember ? 0.064 : 0.076), isMember ? 3200 : 3825);
+            else if (areaSqFt < 500000) review = Math.max(areaSqFt * (isMember ? 0.062 : 0.074), isMember ? 16000 : 19000);
+            else if (areaSqFt < 750000) review = Math.max(areaSqFt * (isMember ? 0.056 : 0.067), isMember ? 31000 : 37000);
+            else custom = true;
+        } else {
+            // Split Review (Design + Construction)
+            let design = 0; let constr = 0;
+            if (areaSqFt < 250000) {
+                design = Math.max(areaSqFt * (isMember ? 0.053 : 0.062), isMember ? 2600 : 3075);
+                constr = Math.max(areaSqFt * (isMember ? 0.018 : 0.020), isMember ? 875 : 1025);
+            } else if (areaSqFt < 500000) {
+                design = Math.max(areaSqFt * (isMember ? 0.050 : 0.060), isMember ? 13250 : 15500);
+                constr = Math.max(areaSqFt * (isMember ? 0.017 : 0.020), isMember ? 4500 : 5000);
+            } else if (areaSqFt < 750000) {
+                design = Math.max(areaSqFt * (isMember ? 0.046 : 0.055), isMember ? 25000 : 30500);
+                constr = Math.max(areaSqFt * (isMember ? 0.016 : 0.018), isMember ? 8500 : 10000);
+            } else custom = true;
+            review = design + constr;
+        }
+
+        document.getElementById('leed-nb-result').style.display = 'block';
+        document.getElementById('leed-nb-reg-fee').innerText = formatUSD.format(reg).replace('$', 'USD ');
+        
+        if(precertReq) {
+            document.getElementById('precert-row').style.display = 'flex';
+            document.getElementById('leed-nb-precert-fee').innerText = formatUSD.format(precert).replace('$', 'USD ');
+        } else {
+            document.getElementById('precert-row').style.display = 'none';
+        }
+
+        if(custom) {
+            document.getElementById('leed-nb-review-fee').innerHTML = '<a href="https://www.usgbc.org/tools/leed-certification/pricing-tool" target="_blank" class="calc-link">LEED Pricing Tool</a>';
+            document.getElementById('leed-nb-total-fee-usd').innerText = "USD " + (reg + precert) + " + Custom";
+        } else {
+            const total = reg + precert + review;
+            document.getElementById('leed-nb-review-fee').innerText = formatUSD.format(review).replace('$', 'USD ');
+            document.getElementById('leed-nb-total-fee-usd').innerText = formatUSD.format(total).replace('$', 'USD ');
+            document.getElementById('leed-nb-total-fee-hkd').innerText = "≈ " + formatHKD.format(total * USD_TO_HKD).replace('HK$', 'HKD ');
+        }
+    }
+
+    function calculateBEAM_EB() {
+        const areaSqM = document.getElementById('beam-unit').value === 'sqft' ? document.getElementById('beam-area').value / SQM_TO_SQFT : document.getElementById('beam-area').value;
+        if(!areaSqM) return alert("Enter area");
+        const sit = document.getElementById('beam-situation').value;
+        const reg = sit == '1' ? 11880 : (sit == '2' ? 8320 : 2380);
+        let assess = 0; let scale = ""; let tbc = false;
+        if (areaSqM <= 2499) { scale = "ES"; assess = 110000; }
+        else if (areaSqM <= 24999) { scale = "S"; assess = 143000; }
+        else if (areaSqM <= 49999) { scale = "M"; assess = 176000; }
+        else if (areaSqM <= 99999) { scale = "L"; assess = 209000; }
+        else if (areaSqM <= 199999) { scale = "EL"; assess = 242000; }
+        else if (areaSqM <= 400000) { scale = "MG"; assess = 275000; }
+        else { scale = "TBC"; tbc = true; }
+
+        document.getElementById('beam-result').style.display = 'block';
+        document.getElementById('beam-scale-text').innerText = scale;
+        document.getElementById('beam-reg-fee').innerText = formatHKD.format(reg).replace('HK$', 'HKD ');
+        document.getElementById('beam-assess-fee').innerText = tbc ? "TBC" : formatHKD.format(assess).replace('HK$', 'HKD ');
+        document.getElementById('beam-total-fee').innerText = tbc ? "TBC" : formatHKD.format(reg + assess).replace('HK$', 'HKD ');
+    }
+
+    function calculateBEAM_NB() {
+        const areaSqM = document.getElementById('beam-nb-unit').value === 'sqft' ? document.getElementById('beam-nb-area').value / SQM_TO_SQFT : document.getElementById('beam-nb-area').value;
+        if(!areaSqM) return alert("Enter area");
+        let reg = 0; let assess = 0; let scale = ""; let tbc = false;
+        if (areaSqM <= 2499) { scale = "ES"; reg = 87250; assess = 217000; }
+        else if (areaSqM <= 24999) { scale = "S"; reg = 211600; assess = 412000; }
+        else if (areaSqM <= 49999) { scale = "M"; reg = 273020; assess = 576000; }
+        else if (areaSqM <= 99999) { scale = "L"; reg = 408520; assess = 1205000; }
+        else if (areaSqM <= 199999) { scale = "EL"; reg = 514420; assess = 1755000; }
+        else if (areaSqM <= 400000) { scale = "MG"; reg = 658900; assess = 2581000; }
+        else if (areaSqM <= 600000) { scale = "ExS"; reg = 945400; assess = 4277000; }
+        else { scale = "TBC"; tbc = true; }
+
+        document.getElementById('beam-nb-result').style.display = 'block';
+        document.getElementById('beam-nb-scale-text').innerText = scale;
+        document.getElementById('beam-nb-reg-fee').innerText = tbc ? "TBC" : formatHKD.format(reg).replace('HK$', 'HKD ');
+        document.getElementById('beam-nb-assess-fee').innerText = tbc ? "TBC" : formatHKD.format(assess).replace('HK$', 'HKD ');
+        document.getElementById('beam-nb-total-fee').innerText = tbc ? "TBC" : formatHKD.format(reg + assess).replace('HK$', 'HKD ');
+    }
+</script>
+</body>
+</html>
