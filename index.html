@@ -515,17 +515,14 @@
                     <button class="tablinks" onclick="openTab(event, 'Interior')">Interior</button>
                 </div>
             </div>
-            <!-- PDF Export Button -->
             <button class="export-btn" onclick="exportToPDF()">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Export Report
             </button>
         </div>
 
-        <!-- NEW BUILDINGS TAB -->
         <div id="New" class="tabcontent" style="display: block;">
 
-            <!-- Global Area Input -->
             <div class="global-input-section">
                 <h3>Project Information (New Buildings)</h3>
                 <div class="form-group">
@@ -545,7 +542,6 @@
             </div>
 
             <div class="calculator-grid">
-                <!-- BEAM Plus NB -->
                 <div class="calculator-section">
                     <h2 class="beam-heading">BEAM Plus NB v2.0</h2>
                     <div class="card-body">
@@ -560,7 +556,6 @@
                     </div>
                 </div>
 
-                <!-- LEED BD+C -->
                 <div class="calculator-section">
                     <h2 class="leed-heading">LEED v4 / v4.1 / v5 BD+C</h2>
                     <div class="card-body">
@@ -574,7 +569,6 @@
                         <div class="form-group">
                             <label>Review Type</label>
                             <select id="leed-nb-review-type">
-                                <!-- UPDATED DEFAULT TO SPLIT -->
                                 <option value="split" selected>Split (Design and Construction separately)</option>
                                 <option value="combined">Combined (Design + Construction)</option>
                             </select>
@@ -606,7 +600,6 @@
                     </div>
                 </div>
 
-                <!-- WELL v2 (New) -->
                 <div class="calculator-section">
                     <h2 class="well-heading">WELL v2</h2>
                     <div class="card-body">
@@ -638,14 +631,12 @@
                     </div>
                 </div>
 
-                <!-- WiredScore & SmartScore (New) -->
                 <div class="calculator-section">
                     <h2 class="ws-heading">WiredScore & SmartScore</h2>
                     <div class="card-body">
                         <div class="form-group">
                             <label>Certification Program (Development)</label>
                             <select id="ws-nb-type">
-                                <!-- UPDATED DEFAULT TO BUNDLE -->
                                 <option value="bundle_office" selected>WiredScore & SmartScore Bundle - Office</option>
                                 <option value="ws_office">WiredScore - Office</option>
                                 <option value="ws_industrial">WiredScore - Industrial</option>
@@ -665,10 +656,8 @@
             </div>
         </div>
 
-        <!-- EXISTING BUILDINGS TAB -->
         <div id="Existing" class="tabcontent">
 
-            <!-- Global Area Input -->
             <div class="global-input-section">
                 <h3>Project Information (Existing Buildings)</h3>
                 <div class="form-group">
@@ -688,7 +677,6 @@
             </div>
 
             <div class="calculator-grid">
-                <!-- BEAM Plus EB -->
                 <div class="calculator-section">
                     <h2 class="beam-heading">BEAM Plus EB v3.0 Scheme A (one-step)</h2>
                     <div class="card-body">
@@ -711,7 +699,6 @@
                     </div>
                 </div>
 
-                <!-- LEED O+M -->
                 <div class="calculator-section">
                     <h2 class="leed-heading">LEED v4 / v4.1 / v5 O+M</h2>
                     <div class="card-body">
@@ -733,7 +720,6 @@
                     </div>
                 </div>
 
-                <!-- WELL v2 (Existing) -->
                 <div class="calculator-section">
                     <h2 class="well-heading">WELL v2</h2>
                     <div class="card-body">
@@ -765,14 +751,12 @@
                     </div>
                 </div>
 
-                <!-- WiredScore & SmartScore (Existing) -->
                 <div class="calculator-section">
                     <h2 class="ws-heading">WiredScore & SmartScore</h2>
                     <div class="card-body">
                         <div class="form-group">
                             <label>Certification Program (Occupied)</label>
                             <select id="ws-eb-type">
-                                <!-- UPDATED DEFAULT TO BUNDLE -->
                                 <option value="bundle_office" selected>WiredScore & SmartScore Bundle - Office</option>
                                 <option value="ws_office">WiredScore - Office</option>
                                 <option value="ws_industrial">WiredScore - Industrial</option>
@@ -792,10 +776,8 @@
             </div>
         </div>
 
-        <!-- INTERIOR TAB -->
         <div id="Interior" class="tabcontent">
 
-            <!-- Global Area Input -->
             <div class="global-input-section">
                 <h3>Project Information (Interior)</h3>
                 <div class="form-group">
@@ -815,7 +797,6 @@
             </div>
 
             <div class="calculator-grid">
-                <!-- BEAM Plus Interiors -->
                 <div class="calculator-section">
                     <h2 class="beam-heading">BEAM Plus BI v2.0</h2>
                     <div class="card-body">
@@ -852,7 +833,6 @@
                     </div>
                 </div>
 
-                <!-- LEED ID+C -->
                 <div class="calculator-section">
                     <h2 class="leed-heading">LEED v4 / v4.1 / v5 ID+C</h2>
                     <div class="card-body">
@@ -866,7 +846,6 @@
                         <div class="form-group">
                             <label>Review Type</label>
                             <select id="leed-id-review-type">
-                                <!-- UPDATED DEFAULT TO SPLIT -->
                                 <option value="split" selected>Split (Design and Construction separately)</option>
                                 <option value="combined">Combined (Design + Construction)</option>
                             </select>
@@ -890,7 +869,6 @@
                     </div>
                 </div>
 
-                <!-- WELL v2 (Interior) -->
                 <div class="calculator-section">
                     <h2 class="well-heading">WELL v2</h2>
                     <div class="card-body">
@@ -995,7 +973,7 @@
         }
     }
 
-    // --- PDF Export Logic (Report Style) ---
+    // --- PDF Export Logic (Detailed Breakdown Style - Compact for 1 Page) ---
     function exportToPDF() {
         const activeTab = document.querySelector('.tabcontent[style*="display: block"]');
         if (!activeTab) return;
@@ -1009,101 +987,179 @@
 
         const getVal = (id) => {
             const el = document.getElementById(id);
-            if (!el) return 'N/A';
-            const box = el.closest('.result-box');
-            if (box && box.style.display !== 'block') return 'Not Calculated';
-            return el.innerText;
+            return el ? el.innerText : '';
         };
 
-        // NEW: Grab the Project Name
-        const projectName = document.getElementById(`${prefix}-project-name`)?.value || 'Not Specified';
+        const isVisible = (id) => {
+            const el = document.getElementById(id);
+            if (!el || el.style.display === 'none') return false;
+            const box = el.closest('.result-box');
+            if (box && box.style.display !== 'block') return false;
+            return true;
+        };
 
+        const projectName = document.getElementById(`${prefix}-project-name`)?.value || 'Not Specified';
         const globalArea = document.getElementById(`${prefix}-global-area`).value;
         const globalUnit = document.getElementById(`${prefix}-global-unit`).value;
         const areaString = globalArea ? `${parseFloat(globalArea).toLocaleString()} ${globalUnit}` : 'Not Specified';
 
-        const beamTotal = getVal(`beam-${prefix}-total-fee`);
-        const leedTotalUSD = getVal(`leed-${prefix}-total-fee-usd`);
-        const leedTotalHKD = getVal(`leed-${prefix}-total-fee-hkd`);
-        const wellTotalUSD = getVal(`well-${prefix}-total-usd`);
-        const wellTotalHKD = getVal(`well-${prefix}-total-hkd`);
-        const wsTotal = tabId === 'Interior' ? 'N/A' : getVal(`ws-${prefix}-total`);
-
         const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+
+        // Gather Details for BEAM
+        let beamDetails = '';
+        let beamTotal = 'Not Calculated';
+        if (isVisible(`beam-${prefix}-total-fee`)) {
+            beamTotal = getVal(`beam-${prefix}-total-fee`);
+            beamDetails += `Registration Fee: <strong>${getVal(`beam-${prefix}-reg-fee`)}</strong><br>`;
+            beamDetails += `Assessment Fee: <strong>${getVal(`beam-${prefix}-assess-fee`)}</strong><br>`;
+            
+            if (prefix !== 'id') {
+                beamDetails += `Project Scale: <strong>${getVal(`beam-${prefix}-scale-text`)}</strong><br>`;
+            } else {
+                beamDetails += `Number of Floors: <strong>${getVal(`beam-id-floors-display`)}</strong><br>`;
+                const breakdownEl = document.getElementById('beam-id-floor-breakdown');
+                if (breakdownEl && breakdownEl.innerText.trim() !== '') {
+                    beamDetails += `<div style="margin-top:6px; padding-left: 10px; border-left: 2px solid #cbd5e1; font-size: 11px;">`;
+                    const subRows = breakdownEl.querySelectorAll('.result-sub-row');
+                    subRows.forEach(row => {
+                        const spans = row.querySelectorAll('span');
+                        if (spans.length >= 2) beamDetails += `${spans[0].innerText} <strong>${spans[1].innerText}</strong><br>`;
+                    });
+                    beamDetails += `</div>`;
+                }
+            }
+        } else {
+            beamDetails = '<em>Calculation not run</em>';
+        }
+
+        // Gather Details for LEED
+        let leedDetails = '';
+        let leedTotalUSD = 'Not Calculated';
+        let leedTotalHKD = '';
+        if (isVisible(`leed-${prefix}-total-fee-usd`)) {
+            leedTotalUSD = getVal(`leed-${prefix}-total-fee-usd`);
+            leedTotalHKD = getVal(`leed-${prefix}-total-fee-hkd`);
+            leedDetails += `Registration Fee: <strong>${getVal(`leed-${prefix}-reg-fee`)}</strong><br>`;
+            
+            if (prefix === 'nb' && isVisible('leed-nb-precert-row')) {
+                leedDetails += `Precertification Fee: <strong>${getVal('leed-nb-precert-fee')}</strong><br>`;
+            }
+
+            if (isVisible(`leed-${prefix}-combined-row`)) {
+                leedDetails += `Review Fee (Combined): <strong>${getVal(`leed-${prefix}-review-fee`)}</strong><br>`;
+            } else if (isVisible(`leed-${prefix}-split-container`)) {
+                leedDetails += `Review Fee (Split Total): <strong>${getVal(`leed-${prefix}-split-total`)}</strong><br>`;
+                leedDetails += `&nbsp;&nbsp;↳ Design: <strong>${getVal(`leed-${prefix}-split-design`)}</strong><br>`;
+                leedDetails += `&nbsp;&nbsp;↳ Construction: <strong>${getVal(`leed-${prefix}-split-constr`)}</strong><br>`;
+            } else if (prefix === 'eb') {
+                leedDetails += `Certification Review Fee: <strong>${getVal(`leed-eb-review-fee`)}</strong><br>`;
+            }
+        } else {
+            leedDetails = '<em>Calculation not run</em>';
+        }
+
+        // Gather Details for WELL
+        let wellDetails = '';
+        let wellTotalUSD = 'Not Calculated';
+        let wellTotalHKD = '';
+        if (isVisible(`well-${prefix}-total-usd`)) {
+            wellTotalUSD = getVal(`well-${prefix}-total-usd`);
+            wellTotalHKD = getVal(`well-${prefix}-total-hkd`);
+            wellDetails += `Enrollment Fee: <strong>${getVal(`well-${prefix}-enroll`)}</strong><br>`;
+            wellDetails += `Program Fee: <strong>${getVal(`well-${prefix}-program`)}</strong><br>`;
+            if (isVisible(`well-${prefix}-discount-row`)) {
+                wellDetails += `Member Discount (15%): <strong style="color:#d32f2f;">${getVal(`well-${prefix}-discount`)}</strong><br>`;
+            }
+        } else {
+            wellDetails = '<em>Calculation not run</em>';
+        }
+
+        // Gather Details for WiredScore
+        let wsDetails = '';
+        let wsTotal = 'Not Calculated';
+        if (tabId !== 'Interior') {
+            if (isVisible(`ws-${prefix}-total`)) {
+                wsTotal = getVal(`ws-${prefix}-total`);
+                wsDetails += `Registration Fee: <strong>${getVal(`ws-${prefix}-reg`)}</strong><br>`;
+                wsDetails += `Certification Fee: <strong>${getVal(`ws-${prefix}-cert`)}</strong><br>`;
+            } else {
+                wsDetails = '<em>Calculation not run</em>';
+            }
+        }
 
         const reportElement = document.createElement('div');
         reportElement.innerHTML = `
-            <div style="font-family: 'Inter', Helvetica, Arial, sans-serif; color: #1a202c; padding: 50px 40px; max-width: 800px; margin: 0 auto; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column;">
+            <div style="font-family: 'Inter', Helvetica, Arial, sans-serif; color: #1a202c; padding: 20px; max-width: 800px; margin: 0 auto; box-sizing: border-box;">
                 
-                <div style="border-bottom: 3px solid #1e3a5f; padding-bottom: 20px; margin-bottom: 35px;">
-                    <h1 style="color: #1e3a5f; margin: 0 0 8px 0; font-size: 26px; font-weight: 700;">Certification Fee Estimate</h1>
-                    <p style="margin: 0; color: #4a5568; font-size: 14px;">Date Generated: <strong>${dateStr}</strong></p>
+                <div style="border-bottom: 2px solid #1e3a5f; padding-bottom: 10px; margin-bottom: 15px;">
+                    <h1 style="color: #1e3a5f; margin: 0 0 4px 0; font-size: 20px; font-weight: 700;">Certification Fee Estimate Breakdown</h1>
+                    <p style="margin: 0; color: #4a5568; font-size: 11px;">Date Generated: <strong>${dateStr}</strong></p>
                 </div>
 
-                <div style="margin-bottom: 40px; background: #f8fafc; padding: 24px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <h2 style="margin: 0 0 16px 0; font-size: 16px; color: #2c5282; text-transform: uppercase; letter-spacing: 0.5px;">Project Parameters</h2>
-                    <table style="width: 100%; font-size: 15px;">
+                <div style="margin-bottom: 15px; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <h2 style="margin: 0 0 8px 0; font-size: 12px; color: #2c5282; text-transform: uppercase; letter-spacing: 0.5px;">Project Parameters</h2>
+                    <table style="width: 100%; font-size: 12px;">
                         <tr>
-                            <td style="padding: 6px 0; width: 160px; color: #4a5568;">Project Name:</td>
-                            <td style="padding: 6px 0; font-weight: 600;">${projectName}</td>
+                            <td style="padding: 2px 0; width: 140px; color: #4a5568;">Project Name:</td>
+                            <td style="padding: 2px 0; font-weight: 600;">${projectName}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 6px 0; color: #4a5568;">Project Type:</td>
-                            <td style="padding: 6px 0; font-weight: 600;">${tabId} Buildings / Spaces</td>
+                            <td style="padding: 2px 0; color: #4a5568;">Project Type:</td>
+                            <td style="padding: 2px 0; font-weight: 600;">${tabId} Buildings / Spaces</td>
                         </tr>
                         <tr>
-                            <td style="padding: 6px 0; color: #4a5568;">Gross Floor Area:</td>
-                            <td style="padding: 6px 0; font-weight: 600;">${areaString}</td>
+                            <td style="padding: 2px 0; color: #4a5568;">Gross Floor Area:</td>
+                            <td style="padding: 2px 0; font-weight: 600;">${areaString}</td>
                         </tr>
                     </table>
                 </div>
 
-                <div style="margin-bottom: 40px;">
-                    <h2 style="margin: 0 0 16px 0; font-size: 16px; color: #2c5282; text-transform: uppercase; letter-spacing: 0.5px;">Estimated Total Fees</h2>
-                    <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
+                <div style="margin-bottom: 15px;">
+                    <h2 style="margin: 0 0 8px 0; font-size: 12px; color: #2c5282; text-transform: uppercase; letter-spacing: 0.5px;">Detailed Fee Breakdown</h2>
+                    <table style="width: 100%; border-collapse: collapse; font-size: 12px;">
                         <thead>
                             <tr>
-                                <th style="background: #1e3a5f; color: white; padding: 14px 16px; text-align: left; border-radius: 6px 0 0 0; width: 60%;">Certification Scheme</th>
-                                <th style="background: #1e3a5f; color: white; padding: 14px 16px; text-align: right; border-radius: 0 6px 0 0; width: 40%;">Total Estimated Fee</th>
+                                <th style="background: #1e3a5f; color: white; padding: 8px 12px; text-align: left; border-radius: 4px 0 0 0; width: 60%;">Certification Scheme Details</th>
+                                <th style="background: #1e3a5f; color: white; padding: 8px 12px; text-align: right; border-radius: 0 4px 0 0; width: 40%;">Total Estimated Fee</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
-                                    <strong style="font-size: 16px; color: #1a202c;">BEAM Plus</strong><br>
-                                    <span style="color: #718096; font-size: 13px;">Registration & Assessment</span>
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
+                                    <strong style="font-size: 13px; color: #2d6a4f;">BEAM Plus</strong>
+                                    <div style="color: #4a5568; font-size: 11px; margin-top: 4px; line-height: 1.4;">${beamDetails}</div>
                                 </td>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 16px; color: #2d6a4f; vertical-align: top;">
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 13px; color: #2d6a4f; vertical-align: top;">
                                     ${beamTotal}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
-                                    <strong style="font-size: 16px; color: #1a202c;">LEED</strong><br>
-                                    <span style="color: #718096; font-size: 13px;">Registration, Precertification & Review</span>
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
+                                    <strong style="font-size: 13px; color: #4361ee;">LEED</strong>
+                                    <div style="color: #4a5568; font-size: 11px; margin-top: 4px; line-height: 1.4;">${leedDetails}</div>
                                 </td>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 16px; color: #4361ee; vertical-align: top;">
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 13px; color: #4361ee; vertical-align: top;">
                                     ${leedTotalUSD}
-                                    ${(leedTotalHKD !== 'Not Calculated' && leedTotalHKD !== 'N/A') ? `<div style="font-size: 13px; font-weight: 500; color: #718096; margin-top: 4px;">${leedTotalHKD}</div>` : ''}
+                                    ${(leedTotalHKD !== '' && leedTotalHKD !== '≈ TBC') ? `<div style="font-size: 11px; font-weight: 500; color: #718096; margin-top: 2px;">${leedTotalHKD}</div>` : ''}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
-                                    <strong style="font-size: 16px; color: #1a202c;">WELL v2</strong><br>
-                                    <span style="color: #718096; font-size: 13px;">Enrollment & Program (Inc. Discounts)</span>
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
+                                    <strong style="font-size: 13px; color: #0d7377;">WELL v2</strong>
+                                    <div style="color: #4a5568; font-size: 11px; margin-top: 4px; line-height: 1.4;">${wellDetails}</div>
                                 </td>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 16px; color: #0d7377; vertical-align: top;">
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 13px; color: #0d7377; vertical-align: top;">
                                     ${wellTotalUSD}
-                                    ${(wellTotalHKD !== 'Not Calculated' && wellTotalHKD !== 'N/A') ? `<div style="font-size: 13px; font-weight: 500; color: #718096; margin-top: 4px;">${wellTotalHKD}</div>` : ''}
+                                    ${(wellTotalHKD !== '' && wellTotalHKD !== '≈ TBC') ? `<div style="font-size: 11px; font-weight: 500; color: #718096; margin-top: 2px;">${wellTotalHKD}</div>` : ''}
                                 </td>
                             </tr>
                             ${tabId !== 'Interior' ? `
                             <tr>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
-                                    <strong style="font-size: 16px; color: #1a202c;">WiredScore & SmartScore</strong><br>
-                                    <span style="color: #718096; font-size: 13px;">Registration & Certification</span>
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top;">
+                                    <strong style="font-size: 13px; color: #6b46c1;">WiredScore & SmartScore</strong>
+                                    <div style="color: #4a5568; font-size: 11px; margin-top: 4px; line-height: 1.4;">${wsDetails}</div>
                                 </td>
-                                <td style="padding: 18px 16px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 16px; color: #6b46c1; vertical-align: top;">
+                                <td style="padding: 10px 12px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: 700; font-size: 13px; color: #6b46c1; vertical-align: top;">
                                     ${wsTotal}
                                 </td>
                             </tr>
@@ -1112,15 +1168,15 @@
                     </table>
                 </div>
 
-                <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid #e2e8f0; text-align: center; color: #718096; font-size: 12px; line-height: 1.5;">
-                    <p style="margin: 0 0 8px 0;">This report is an automated estimate generated for reference purposes only. Final official fees are subject to verification with the respective certification bodies.</p>
+                <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #e2e8f0; text-align: center; color: #718096; font-size: 10px; line-height: 1.4;">
+                    <p style="margin: 0 0 4px 0;">This report is an automated estimate generated for reference purposes only. Final official fees are subject to verification with the respective certification bodies.</p>
                     <p style="margin: 0;"><strong>Note:</strong> Pricing frameworks are effective from 1 April 2026.</p>
                 </div>
             </div>
         `;
 
         const opt = {
-            margin:       [0.5, 0.5, 0.5, 0.5],
+            margin:       [0.3, 0.3, 0.3, 0.3],
             filename:     `fee_report_${projectName.replace(/\s+/g, '_').toLowerCase()}.pdf`,
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true },
