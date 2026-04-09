@@ -529,11 +529,21 @@
                     <label>Project Name</label>
                     <input type="text" id="nb-project-name" placeholder="Enter project name">
                 </div>
-                <div class="form-group" style="margin-bottom: 0;">
+                <div class="form-group">
                     <label>Gross Floor Area</label>
                     <div class="input-group">
                         <input type="number" id="nb-global-area" placeholder="Enter total area" min="0">
                         <select id="nb-global-unit">
+                            <option value="sqm">sq m</option>
+                            <option value="sqft">sq ft</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Construction Floor Area</label>
+                    <div class="input-group">
+                        <input type="number" id="nb-cfa-area" placeholder="Enter construction area" min="0">
+                        <select id="nb-cfa-unit">
                             <option value="sqm">sq m</option>
                             <option value="sqft">sq ft</option>
                         </select>
@@ -664,11 +674,21 @@
                     <label>Project Name</label>
                     <input type="text" id="eb-project-name" placeholder="Enter project name">
                 </div>
-                <div class="form-group" style="margin-bottom: 0;">
+                <div class="form-group">
                     <label>Gross Floor Area</label>
                     <div class="input-group">
                         <input type="number" id="eb-global-area" placeholder="Enter total area" min="0">
                         <select id="eb-global-unit">
+                            <option value="sqm">sq m</option>
+                            <option value="sqft">sq ft</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label>Construction Floor Area</label>
+                    <div class="input-group">
+                        <input type="number" id="eb-cfa-area" placeholder="Enter construction area" min="0">
+                        <select id="eb-cfa-unit">
                             <option value="sqm">sq m</option>
                             <option value="sqft">sq ft</option>
                         </select>
@@ -948,6 +968,38 @@
         };
     }
 
+    // Helper function to grab Construction Floor Area specifically
+    function getCFAArea(prefix, schemeDefaultUnit) {
+        const cfaInput = document.getElementById(`${prefix}-cfa-area`);
+        if(!cfaInput) return null; // Safety fallback
+        
+        const rawArea = parseFloat(cfaInput.value);
+        const inputUnit = document.getElementById(`${prefix}-cfa-unit`).value;
+
+        if(isNaN(rawArea) || rawArea <= 0) {
+            alert("Please enter a valid Construction Floor Area in the Project Information section.");
+            return null;
+        }
+
+        let valueInSchemeUnit;
+        if (inputUnit === schemeDefaultUnit) {
+            valueInSchemeUnit = rawArea;
+        } else {
+            if (schemeDefaultUnit === 'sqm') {
+                valueInSchemeUnit = rawArea / SQM_TO_SQFT;
+            } else {
+                valueInSchemeUnit = rawArea * SQM_TO_SQFT;
+            }
+        }
+
+        return { 
+            raw: rawArea,
+            inputUnit: inputUnit,
+            schemeUnit: schemeDefaultUnit,
+            value: valueInSchemeUnit
+        };
+    }
+
     function updateFloorInputs() {
         const numFloors = parseInt(document.getElementById('beam-id-floors').value) || 1;
         const wrapper = document.getElementById('floor-inputs-wrapper');
@@ -1002,6 +1054,18 @@
         const globalArea = document.getElementById(`${prefix}-global-area`).value;
         const globalUnit = document.getElementById(`${prefix}-global-unit`).value;
         const areaString = globalArea ? `${parseFloat(globalArea).toLocaleString()} ${globalUnit}` : 'Not Specified';
+
+        const cfaArea = document.getElementById(`${prefix}-cfa-area`) ? document.getElementById(`${prefix}-cfa-area`).value : null;
+        const cfaUnit = document.getElementById(`${prefix}-cfa-unit`) ? document.getElementById(`${prefix}-cfa-unit`).value : '';
+        let cfaRow = '';
+        if (document.getElementById(`${prefix}-cfa-area`)) {
+            const cfaString = cfaArea ? `${parseFloat(cfaArea).toLocaleString()} ${cfaUnit}` : 'Not Specified';
+            cfaRow = `
+            <tr>
+                <td style="padding: 2px 0; color: #4a5568;">Construction Floor Area:</td>
+                <td style="padding: 2px 0; font-weight: 600;">${cfaString}</td>
+            </tr>`;
+        }
 
         const dateStr = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
@@ -1111,6 +1175,7 @@
                             <td style="padding: 2px 0; color: #4a5568;">Gross Floor Area:</td>
                             <td style="padding: 2px 0; font-weight: 600;">${areaString}</td>
                         </tr>
+                        ${cfaRow}
                     </table>
                 </div>
 
@@ -1188,7 +1253,8 @@
 
     // --- BEAM Plus NB ---
     function calculateBEAM_NB() {
-        const area = getGlobalArea('nb', 'sqm');
+        // Changed to use getCFAArea instead of getGlobalArea
+        const area = getCFAArea('nb', 'sqm');
         if(!area) return;
 
         let reg = 0, assess = 0, scale = "", tbc = false;
@@ -1275,7 +1341,8 @@
 
     // --- BEAM Plus EB ---
     function calculateBEAM_EB() {
-        const area = getGlobalArea('eb', 'sqm');
+        // Changed to use getCFAArea instead of getGlobalArea
+        const area = getCFAArea('eb', 'sqm');
         if(!area) return;
 
         const sit = document.getElementById('beam-eb-situation').value;
